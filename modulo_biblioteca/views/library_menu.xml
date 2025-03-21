@@ -1,0 +1,9 @@
+<odoo>
+    <menuitem id="library_main_menu" name="Library"/>
+
+    <menuitem id="menu_authors" name="Authors" parent="library_main_menu" action="action_library_author"/>
+    <menuitem id="menu_categories" name="Categories" parent="library_main_menu" action="action_library_category" />
+    <menuitem id="menu_books" name="Books" parent="library_main_menu" action="action_library_book"/>
+    <menuitem id="menu_loans" name="Loans" parent="library_main_menu" action="action_library_loan"/>
+    <menuitem id="menu_user" name="Users" parent="library_main_menu" action="action_library_user"/>
+</odoo>

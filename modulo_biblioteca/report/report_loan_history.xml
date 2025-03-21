@@ -1,0 +1,69 @@
+<odoo>
+    <record id="action_report_registered_users" model="ir.actions.report">
+        <field name="name">Informe de Usuarios Registrados</field>
+        <field name="model">library.user</field>
+        <field name="report_name">modulo_biblioteca.report_registered_users</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_library_loan"/> 
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_registered_users">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="user"> 
+                <style type="text/css">
+                    .page {
+                        font-family: Arial, sans-serif;
+                        margin: 20px;         
+                        padding: 20px;
+                        border: 1px solid #ccc;
+                    }
+                    p{
+                        margin: 5px;
+                        color: #333;
+                    }
+                    tr, td{
+                        border: 1px solid #ccc;
+                    }
+                </style>
+                <div class="page">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <h2>Informe de Usuarios Registrados</h2>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p><strong>Nombre:</strong></p>
+                                </td>
+                                <td>
+                                    <p><t t-esc="user.full_name"/></p> <!-- Asegúrate de que 'full_name' exista en tu modelo -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>Email:</strong></p>
+                                </td>
+                                <td>
+                                    <p><t t-esc="user.email"/></p> <!-- Asegúrate de que 'email' exista en tu modelo -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>Telefono:</strong></p>
+                                </td>
+                                <td>
+                                    <p><t t-esc="user.phone"/></p> <!-- Asegúrate de que 'phone' exista en tu modelo -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

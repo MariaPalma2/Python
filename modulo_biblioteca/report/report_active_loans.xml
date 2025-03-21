@@ -1,0 +1,67 @@
+<odoo>
+    <record id="action_report_active_loans" model="ir.actions.report">
+        <field name="name">Informe de Préstamos Activos</field>
+        <field name="model">library.loan</field>
+        <field name="report_name">modulo_biblioteca.report_active_loans</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_library_loan"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_active_loans">
+        <t t-call="web.html_container">
+            <t t-if="docs">
+                <style type="text/css">
+                    .page {
+                        font-family: Arial, sans-serif;
+                        margin: 20px;         
+                        padding: 20px;
+                        border: 1px solid #ccc;
+                    }
+                    p {
+                        margin: 5px;
+                        color: #333;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        border: 1px solid #ccc;
+                        padding: 8px;
+                        text-align: left;
+                    }
+                </style>
+
+                <div class="page">
+                    <h2>Informe de Préstamos Activos</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Libro</th>
+                                <th>Fecha de Préstamo</th>
+                                <th>Fecha de Devolución</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="loan">
+                                <t t-if="loan.state == 'pending'">
+                                    <tr>
+                                        <td><t t-esc="loan.user_id.name"/></td>
+                                        <td><t t-esc="loan.book_id.title"/></td>
+                                        <td><t t-esc="loan.loan_date"/></td>
+                                        <td><t t-esc="loan.return_date"/></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+            <t t-else="">
+                <p>No hay préstamos activos.</p>
+            </t>
+        </t>
+    </template>
+</odoo>

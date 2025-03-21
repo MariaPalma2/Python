@@ -1,0 +1,60 @@
+<odoo>
+    <record id="action_report_registered_users" model="ir.actions.report">
+        <field name="name">Informe de Usuarios Registrados</field>
+        <field name="model">library.user</field>
+        <field name="report_name">modulo_biblioteca.report_registered_users</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_library_user"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_registered_users">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="user">
+                <style type="text/css">
+                    .page {
+                        font-family: Arial, sans-serif;
+                        margin: 20px;
+                        padding: 20px;
+                        border: 1px solid #ccc;
+                    }
+                    p {
+                        margin: 5px;
+                        color: #333;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    tr, td {
+                        border: 1px solid #ccc;
+                        padding: 5px;
+                    }
+                    h2 {
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+                </style>
+                <div class="page">
+                    <h2>Informe de Usuarios Registrados</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><strong>Nombre</strong></th>
+                                <th><strong>Email</strong></th>
+                                <th><strong>Teléfono</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><t t-esc="user.name"/></td>
+                                <td><t t-esc="user.email"/></td>
+                                <td><t t-esc="user.phone"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
